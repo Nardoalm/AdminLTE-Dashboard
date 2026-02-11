@@ -9,23 +9,18 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-      @csrf
-</form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-      @csrf
-@method('patch')
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+        @csrf
+        @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nome')" />
             <x-text-input
                 id="name"
                 name="name"
                 type="text"
                 class="mt-1 block w-full"
                 :value="old('name', auth()->user()->name)"
-                required
                 autofocus
                 autocomplete="name"
             />
@@ -40,15 +35,15 @@
                 type="email"
                 class="mt-1 block w-full"
                 :value="old('email', auth()->user()->email)"
-                required
                 autocomplete="username"
             />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+        @include("profile.partials.update-avatar-form")
 
+        <div class="flex items-center gap-4">
+            <button class="btn btn-success">Salvar</button>
             @if (session('status') === 'profile-updated')
                 <p
                     x-data="{ show: true }"

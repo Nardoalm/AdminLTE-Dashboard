@@ -17,12 +17,12 @@ class ProfileController extends Controller
 
     public function index(){
         $user = Auth::user();
-        return view('.profile',compact('user'));
+        return view('admin.profile',compact('user'));
     }
 
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('admin.profile', [
             'user' => $request->user(),
         ]);
     }
@@ -32,15 +32,18 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = auth()->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->fill($request->validated());
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $user->setAvatarAttribute($path);
         }
 
-        $request->user()->save();
+        $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('admin.profile')->with('status', 'profile-updated');
     }
 
     /**
