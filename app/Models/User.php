@@ -58,4 +58,14 @@ class User extends Authenticatable
     public function setAvatarAttribute(string $avatar): void{
         $this->attributes['avatar'] = $avatar;
     }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public function defaultPhoto()
+    {
+        return $this->hasOne(Photo::class)->where('is_default', true);
+    }
 }

@@ -156,8 +156,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
+    <aside class="main-sidebar sidebar-custom elevation-4">   <!-- Brand Logo -->
     <a href="{{ url('/dashboard') }}" class="brand-link">
       <img src="{{ asset('vendor/adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
@@ -188,7 +187,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-      
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -298,7 +297,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+    <aside class="main-sidebar sidebar-custom elevation-4">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
@@ -317,3 +316,28 @@
 <script src="{{ asset('vendor/adminlte/dist/js/demo.js') }}"></script>
 </body>
 </html>
+
+<style>
+    .sidebar-custom {
+        background-color: #13293D !important;
+    }
+
+    .sidebar-custom .nav-link {
+        color: #E8F1F2 !important;
+        transition: 0.2s;
+    }
+
+    .sidebar-custom .nav-link:hover {
+        background-color: #247BA0 !important;
+        color: #ffffff !important;
+    }
+
+    .sidebar-custom .nav-link.active {
+        background-color: #006494 !important;
+        color: #ffffff !important;
+    }
+
+    .sidebar-custom .nav-link.active .nav-icon {
+        color: #1B98E0 !important;
+    }
+</style>

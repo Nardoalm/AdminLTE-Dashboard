@@ -84,8 +84,10 @@ class UserController extends Controller
         return redirect('/admin/users');
     }
 
-    public function photos(User $user)
+    public function photos($id)
     {
-        return view('user.photos', compact('user'));
+        $user = User::with('photos', 'defaultPhoto')->findOrFail($id);
+
+        return view('photo.index', compact('user'));
     }
 }

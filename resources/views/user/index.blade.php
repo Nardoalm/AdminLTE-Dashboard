@@ -49,9 +49,9 @@
           <td>
             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">EDITAR</a>
           </td>
-            <td>
-                <a href="{{ route('users.photos', $user->id) }}" class="btn btn-secondary">FOTOS</a>
-            </td>
+          <td>
+            <a href="{{ route('photos.index', $user->id) }}" class="btn btn-secondary">FOTOS</a>
+          </td>
         </tr>
       @endforeach
       </tbody>

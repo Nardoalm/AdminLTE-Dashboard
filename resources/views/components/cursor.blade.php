@@ -11,7 +11,7 @@
     .cursor-dot {
         width: 8px;
         height: 8px;
-        background-color: #00c054; /* Roxo principal */
+        background-color: #1B98E0; /* Roxo principal */
         pointer-events: none;
         position: fixed;
         top: 0;
@@ -26,7 +26,7 @@
     .cursor-outline {
         width: 40px;
         height: 40px;
-        border: 2px solid #00c054;
+        border: 2px solid #1B98E0;
         pointer-events: none;
         position: fixed;
         top: 0;

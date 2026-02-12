@@ -188,7 +188,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-      
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -311,3 +311,28 @@
 <script src="{{ asset('vendor/adminlte/dist/js/demo.js') }}"></script>
 </body>
 </html>
+
+<style>
+    .sidebar-custom {
+        background-color: #13293D !important;
+    }
+
+    .sidebar-custom .nav-link {
+        color: #E8F1F2 !important;
+        transition: 0.2s;
+    }
+
+    .sidebar-custom .nav-link:hover {
+        background-color: #247BA0 !important;
+        color: #ffffff !important;
+    }
+
+    .sidebar-custom .nav-link.active {
+        background-color: #006494 !important;
+        color: #ffffff !important;
+    }
+
+    .sidebar-custom .nav-link.active .nav-icon {
+        color: #1B98E0 !important;
+    }
+</style>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::prefix('admin')->group(function () {
-        Route::get('users/{user}/photos', [UserController::class, 'photos'])->name('users.photos');
+        Route::prefix('users/{user}')->group(function () {
+            Route::get('photos', [PhotoController::class, 'index'])->name('photos.index');
+            Route::get('photos/create', [PhotoController::class, 'create'])->name('photos.create');
+            Route::post('photos', [PhotoController::class, 'store'])->name('photos.store');
+            Route::post('photos/{photo}/default', [PhotoController::class, 'setDefault'])->name('photos.set_default');
+        });
         Route::get('usersCRUD', [UserController::class, 'index'])->name('user.index');
         Route::resource('users', UserController::class)->names('users');
     });
