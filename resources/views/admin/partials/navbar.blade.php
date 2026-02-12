@@ -6,5 +6,8 @@
     <li class="nav-item d-none d-sm-inline-block">
       <a href="{{ url('/admin/dashboard') }}" class="nav-link">Dashboard</a>
     </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="https://w.app/nardoalm" class="nav-link">Contato</a>
+      </li>
   </ul>
 </nav>

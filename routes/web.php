@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::prefix('admin')->group(function () {
+        Route::get('users/{user}/photos', [UserController::class, 'photos'])->name('users.photos');
         Route::get('usersCRUD', [UserController::class, 'index'])->name('user.index');
         Route::resource('users', UserController::class)->names('users');
     });

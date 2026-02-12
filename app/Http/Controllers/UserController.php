@@ -83,4 +83,9 @@ class UserController extends Controller
         $user->delete();
         return redirect('/admin/users');
     }
+
+    public function photos(User $user)
+    {
+        return view('user.photos', compact('user'));
+    }
 }

@@ -11,7 +11,7 @@
     .cursor-dot {
         width: 8px;
         height: 8px;
-        background-color: #6a11cb; /* Roxo principal */
+        background-color: #00c054; /* Roxo principal */
         pointer-events: none;
         position: fixed;
         top: 0;
@@ -26,7 +26,7 @@
     .cursor-outline {
         width: 40px;
         height: 40px;
-        border: 2px solid #6a11cb;
+        border: 2px solid #00c054;
         pointer-events: none;
         position: fixed;
         top: 0;
@@ -41,7 +41,7 @@
     /* Efeito de clique (opcional) */
     body:active .cursor-outline {
         transform: translate(-50%, -50%) scale(0.8);
-        background-color: rgba(106, 17, 203, 0.1);
+        background-color: rgba(102, 17, 203, 0.2);
     }
 </style>
 
