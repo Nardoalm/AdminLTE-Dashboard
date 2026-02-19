@@ -28,6 +28,7 @@
   </div>
   <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('POST')
     <div class="card-body">
       <div class="form-group">
         <label for="user-name">Usuario</label>

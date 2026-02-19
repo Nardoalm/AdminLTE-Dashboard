@@ -39,22 +39,8 @@
             />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
-
-        @include("profile.partials.update-avatar-form")
-
         <div class="flex items-center gap-4">
             <button class="btn btn-success">Salvar</button>
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >
-                    {{ __('Salvo.') }}
-                </p>
-            @endif
         </div>
     </form>
 </section>

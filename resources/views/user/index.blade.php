@@ -23,9 +23,18 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Area de desenvolvimento</h3>
+    <h3 class="card-title">Área de desenvolvimento</h3>
   </div>
   <div class="card-body">
+      @if($errors->any())
+          <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>
+                      @foreach($errors->all() as $error)
+                          {{ $error }}
+                      @endforeach
+                </div>
+              </div>
+      @endif
     <table class="table table-bordered">
       <thead>
         <tr>

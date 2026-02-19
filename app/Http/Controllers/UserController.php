@@ -37,6 +37,8 @@ class UserController extends Controller
 
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        } else {
+            $data['avatar'] = url("/storage/avatars/default.png");
         }
 
         User::create($data);
@@ -80,6 +82,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $photos = $user->photos();
+        if ($photos->count() > 0) {
+            return back()->withErrors([
+                'error' => 'Usuário tem fotos, portanto, não pode ser apagado.'
+            ]);
+        }
         $user->delete();
         return redirect('/admin/users');
     }

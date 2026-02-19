@@ -73,19 +73,42 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Photo $photo)
+    public function destroy(User $user, Photo $photo)
     {
+        $photo = $user->photos()->findOrFail($photo->id);
         $photo->delete();
-        return redirect('/admin/photos');
+        return view('photo.index', compact('user'));
     }
 
     public function setDefault(User $user, Photo $photo)
     {
+        $default = $user->photos()->where('is_default', true)->first();
+
+        if($default != null){
+            $default->update(['is_default' => false]);
+        }
+
         $photo = $user->photos()->findOrFail($photo->id);
-        $user->photos()->update(['is_default' => false]);
 
         $photo->update(['is_default' => true]);
 
         return back();
+    }
+
+    public function removeDefault(User $user, Photo $photo)
+    {
+        $photo = $user->photos()->findOrFail($photo->id);
+        $photo->update(['is_default' => false]);
+        return back();
+    }
+
+    public static function getDefaultPhoto(User $user){
+        $photo = $user->photos()->where('is_default', true)->first();
+
+        if ($photo) {
+            return $photo->path;
+        }
+
+        return null;
     }
 }

@@ -33,12 +33,13 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = auth()->user();
+        $validated = $request->validated();
 
-        $user->fill($request->validated());
+        $user->fill(collect($validated)->except('avatar')->all());
 
         if ($request->hasFile('avatar')) {
             $path = $request->file('avatar')->store('avatars', 'public');
-            $user->setAvatarAttribute($path);
+            $user->avatar = $path;
         }
 
         $user->save();

@@ -30,11 +30,11 @@
                 <form action="{{ route('photos.store', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="file" name="photos[]" multiple>
-                    <button type="submit">Enviar</button>
+                    <button type="submit" class="btn btn-success">Enviar</button>
                 </form>
             </div>
             <div class="card-footer">
-                <a href="{{ route('photos.index', $user->id) }}" class="btn btn-info">VOLTAR</a>
+                <a href="{{ route('photos.index', $user) }}" class="btn btn-info">VOLTAR</a>
             </div>
     </div>
 @endsection
