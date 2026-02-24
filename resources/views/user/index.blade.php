@@ -38,29 +38,40 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Email</th>
-          <th colspan="3">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-      @foreach($users as $user)
-        <tr>
-          <td>{{ $user->name }}</td>
-          <td>{{ $user->email }}</td>
-          <td>
-            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-danger">DELETAR</button>
-            </form>
-          </td>
-          <td>
-            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">EDITAR</a>
-          </td>
-          <td>
-            <a href="{{ route('photos.index', $user->id) }}" class="btn btn-secondary">FOTOS</a>
-          </td>
+            <th>Avatar</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th colspan="4">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($users as $user)
+            <tr>
+                <td>
+                    <div class="image">
+                        <img src="{{ $user->avatar
+                  ? asset('storage/'.$user->avatar)
+                  : asset('storage/avatars/default.png') }}"
+                             class="img-circle elevation-2"
+                             style="width:40px; height:40px; border-radius:50%; object-fit:cover;"
+                             alt="User Image">
+                    </div>
+                </td>
+              <td>{{ $user->name }}</td>
+              <td>{{ $user->email }}</td>
+              <td>
+                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger">DELETAR</button>
+                </form>
+              </td>
+              <td>
+                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">EDITAR</a>
+              </td>
+              <td>
+                <a href="{{ route('photos.index', $user->id) }}" class="btn btn-secondary">FOTOS</a>
+              </td>
         </tr>
       @endforeach
       </tbody>

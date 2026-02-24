@@ -37,8 +37,6 @@ class UserController extends Controller
 
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
-        } else {
-            $data['avatar'] = url("/storage/avatars/default.png");
         }
 
         User::create($data);

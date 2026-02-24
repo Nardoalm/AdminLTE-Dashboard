@@ -16,9 +16,10 @@
             <div class="image">
                 <img src="{{ Auth::user()->avatar
                   ? asset('storage/'.Auth::user()->avatar)
-                  : asset('resources/img/person-fill.svg') }}"
+                  : asset('storage/avatars/default.png') }}"
                      class="img-circle elevation-2"
-                     alt="User Image">
+                     style="width:40px; height:40px; border-radius:50%; object-fit:cover;"
+                alt="User Image">
             </div>
             <div class="info">
                 <a href="{{ route('admin.profile') }}" class="d-block text-white">
