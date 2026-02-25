@@ -26,6 +26,9 @@
     <h3 class="card-title">Área de desenvolvimento</h3>
   </div>
   <div class="card-body">
+      <div id="successMessage" class="alert alert-success d-none"></div>
+      <div id="errorMessage" class="alert alert-danger d-none"></div>
+
       @if($errors->any())
           <div class="alert alert-danger d-flex align-items-center" role="alert">
                 <div>
@@ -63,7 +66,7 @@
                 <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-danger">DELETAR</button>
+                    <button type="submit" class="btn btn-danger" onclick="deleteUser({{ $user->id }})">DELETAR</button>
                 </form>
               </td>
               <td>

@@ -191,7 +191,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-      
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -213,7 +213,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link"
+            <a href="{{ route('logout') }}" class="nav-link logout-link"
                onclick="event.preventDefault(); document.getElementById('sidebar-logout-form').submit();">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Sair</p>

@@ -68,6 +68,9 @@ class UserController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('avatar')) {
+            if ($user->avatar != null){
+                Storage::disk('public')->delete($user->avatar);
+            }
             $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 

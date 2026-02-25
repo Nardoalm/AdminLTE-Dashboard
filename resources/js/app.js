@@ -1,6 +1,7 @@
 import './bootstrap';
+import './users.js';
 
-import Axios from 'axios';
+import axios from 'axios';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

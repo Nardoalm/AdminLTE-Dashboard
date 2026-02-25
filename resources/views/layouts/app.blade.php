@@ -33,5 +33,11 @@
 {{ $slot }}
             </main>
         </div>
+
+    <style>
+        .logout-link:hover {
+            background-color: #c80000;
+        }
+    </style>
     </body>
 </html>
