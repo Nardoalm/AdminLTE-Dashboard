@@ -14,9 +14,7 @@
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
             <div class="image">
-                <img src="{{ Auth::user()->avatar
-                  ? asset('storage/'.Auth::user()->avatar)
-                  : asset('storage/avatars/default.png') }}"
+                <img src="{{ auth()->user()->getAvatarUrlAttribute() }}"
                      class="img-circle elevation-2"
                      style="width:40px; height:40px; border-radius:50%; object-fit:cover;"
                 alt="User Image">

@@ -63,11 +63,9 @@
               <td>{{ $user->name }}</td>
               <td>{{ $user->email }}</td>
               <td>
-                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="deleteUser({{ $user->id }})">DELETAR</button>
-                </form>
+                  <button type="button" class="btn btn-danger" onclick="deleteUser(event, {{ $user->id }})">
+                      DELETAR
+                  </button>
               </td>
               <td>
                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">EDITAR</a>
@@ -79,7 +77,10 @@
       @endforeach
       </tbody>
     </table>
+      <div class="btn-group">
     <a href="{{ route('users.create') }}" class="btn btn-success mt-3">CRIAR USUARIO</a>
+      <button class="btn btn-info mt-3" onclick="generateUsers(event)">GERAR USUÁRIOS</button>
+      </div>
   </div>
 </div>
 @endsection

@@ -3,10 +3,37 @@
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : view('auth.login');
+});
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/google/callback', function () {
+
+    $googleUser = Socialite::driver('google')->user();
+
+    $user = User::updateOrCreate(
+        ['email' => $googleUser->getEmail()],
+        [
+            'name' => $googleUser->getName(),
+            'google_id' => $googleUser->getId(),
+            'password' => bcrypt('123456'),
+            'address' => 'Rua da zuada',
+            'cep' => '44730000',
+            'google_avatar' => $googleUser->getAvatar(),
+        ]
+    );
+
+    Auth::login($user);
+
+    return redirect('/dashboard');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -15,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::prefix('admin')->group(function () {
+        Route::post('users/generate', [UserController::class, 'generateUsers'])->name('users.generate');
         Route::get('dashboard', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');

@@ -29,7 +29,9 @@ class User extends Authenticatable
         'password',
         'address',
         'cep',
-        'avatar'
+        'avatar',
+        'google_id',
+        'google_avatar'
     ];
 
     /**
@@ -59,6 +61,17 @@ class User extends Authenticatable
         $this->attributes['avatar'] = $avatar;
     }
 
+    public function getAvatarUrlAttribute(): string{
+        if($this->avatar){
+            return asset('storage/' . $this->avatar);
+        }
+
+        if ($this->google_avatar){
+            return $this->google_avatar;
+        }
+
+        return asset('storage/avatars/default.png');
+    }
     public function photos()
     {
         return $this->hasMany(Photo::class);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Database\Factories\UserFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -83,14 +85,23 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if ($user->id === auth()->id()) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Você não pode apagar seu próprio usuário.'
+            ], 403);
+        }
         $photos = $user->photos();
         if ($photos->count() > 0) {
-            return back()->withErrors([
-                'error' => 'Usuário tem fotos, portanto, não pode ser apagado.'
-            ]);
+            return response()->json([
+                'success' => false,
+                'error' => 'Este usuário tem fotos, portanto, não pode ser apagado.'
+            ], 403);
         }
         $user->delete();
-        return redirect('/admin/users');
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     public function photos($id)
@@ -98,5 +109,15 @@ class UserController extends Controller
         $user = User::with('photos', 'defaultPhoto')->findOrFail($id);
 
         return view('photo.index', compact('user'));
+    }
+
+    public function generateUsers(){
+        $users = User::factory()->count(5)->create();
+
+        return response()->json([
+            'users' => $users,
+            'success' => true,
+            'message' => 'Usuários falsos gerados!'
+        ]);
     }
 }
