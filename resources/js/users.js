@@ -40,11 +40,7 @@ window.generateUsers = function(event){
             successBox.classList.remove('d-none');
             successBox.textContent = response.data.message;
 
-            const users = response.data.users;
-            const row = event.target.add('tr');
-            if (row) row.add();
-
-            console.log(users);
+            location.reload();
 
             setTimeout(() =>{
                 successBox.classList.add('d-none');

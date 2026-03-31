@@ -52,9 +52,7 @@
             <tr>
                 <td>
                     <div class="image">
-                        <img src="{{ $user->avatar
-                  ? asset('storage/'.$user->avatar)
-                  : asset('storage/avatars/default.png') }}"
+                        <img src="{{ $user->getAvatarUrlAttribute() }}"
                              class="img-circle elevation-2"
                              style="width:40px; height:40px; border-radius:50%; object-fit:cover;"
                              alt="User Image">
@@ -77,7 +75,7 @@
       @endforeach
       </tbody>
     </table>
-      <div class="btn-group">
+      <div class="d-flex">
     <a href="{{ route('users.create') }}" class="btn btn-success mt-3">CRIAR USUARIO</a>
       <button class="btn btn-info mt-3" onclick="generateUsers(event)">GERAR USUÁRIOS</button>
       </div>

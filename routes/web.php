@@ -24,7 +24,7 @@ Route::get('/auth/google/callback', function () {
         [
             'name' => $googleUser->getName(),
             'google_id' => $googleUser->getId(),
-            'password' => bcrypt('123456'),
+            'password' => bcrypt('NWDI23edaw?><dwa;d?'),
             'address' => 'Rua da zuada',
             'cep' => '44730000',
             'google_avatar' => $googleUser->getAvatar(),
