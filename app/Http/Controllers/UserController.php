@@ -111,6 +111,11 @@ class UserController extends Controller
         return view('photo.index', compact('user'));
     }
 
+    public function expenses($id){
+        $user = User::with('expenses')->findOrFail($id);
+
+    }
+
     public function generateUsers(){
         $users = User::factory()->count(5)->create();
 

@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExpenseController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
@@ -37,15 +40,14 @@ Route::get('/auth/google/callback', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [ExpenseController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->group(function () {
         Route::post('users/generate', [UserController::class, 'generateUsers'])->name('users.generate');
-        Route::get('dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('generate-pdf/{id}', [PdfController::class, 'generatePdf'])->name('generate.pdf');
+        Route::get('dashboard', [ExpenseController::class, 'index'])->name('admin.dashboard');
+        Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+        Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
 
         Route::get('profile', function () {
             return view('admin.profile');
@@ -61,6 +63,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('/{photo}', [PhotoController::class, 'destroy'])->name('destroy');
             Route::post('/{photo}/default', [PhotoController::class, 'setDefault'])->name('set_default');
             Route::post('/{photo}/removedefault', [PhotoController::class, 'removeDefault'])->name('remove_default');
+        });
+
+        Route::prefix('users/{user}/expenses')->name('expenses.')->group(function () {
+            Route::get('/', [ExpenseController::class, 'index'])->name('index');
+            Route::post('/', [ExpenseController::class, 'store'])->name('store');
+            Route::delete('/{expense}', [ExpenseController::class, 'destroy'])->name('destroy');
         });
 
         Route::name('admin.')->group(function () {

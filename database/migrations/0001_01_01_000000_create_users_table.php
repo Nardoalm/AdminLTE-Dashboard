@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('address');
             $table->string('cep');
             $table->string('avatar')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('google_avatar')->nullable();
+            $table->decimal('balance', 10, 2)->default(0.00);
+            $table->decimal('income', 10, 2)->default(0.00);
             $table->rememberToken();
             $table->timestamps();
         });

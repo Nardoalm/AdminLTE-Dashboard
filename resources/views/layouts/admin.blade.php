@@ -35,6 +35,7 @@
 <script src="{{ asset('vendor/adminlte/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @stack('scripts')
 </body>
 </html>

@@ -31,7 +31,8 @@ class User extends Authenticatable
         'cep',
         'avatar',
         'google_id',
-        'google_avatar'
+        'google_avatar',
+        'balance'
     ];
 
     /**
@@ -80,5 +81,14 @@ class User extends Authenticatable
     public function defaultPhoto()
     {
         return $this->hasOne(Photo::class)->where('is_default', true);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
+    public function incomes(){
+        return $this->hasMany(Income::class);
     }
 }
